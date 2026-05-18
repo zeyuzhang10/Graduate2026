@@ -8,3 +8,7 @@ reid-models/
 *.pt
 *.zip
 reid-models/
+reid-models/
+*.pth
+*.pt
+*.zip
