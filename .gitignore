@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pth
+*.pt
+*.zip
+reid-models/
+*.pth
+*.pt
+*.zip
+reid-models/
