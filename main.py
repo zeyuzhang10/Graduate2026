@@ -33,7 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
         UIFunctions.uiDefinitions(self)
         # Show module shadows
         shadow_color = QColor(62, 126, 222)  # Unified Blue Shadow
-        UIFunctions.shadow_style(self, self.Class_QF, shadow_color)x
+        UIFunctions.shadow_style(self, self.Class_QF, shadow_color)
         UIFunctions.shadow_style(self, self.Target_QF, shadow_color)
         UIFunctions.shadow_style(self, self.Fps_QF, shadow_color)
         UIFunctions.shadow_style(self, self.Class_QF_2, shadow_color)
@@ -205,8 +205,8 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
         self.Author.setText("By Zeyu")    # Change Top Left Subtitle
 
         # Modify Home Page Text
-        self.explain_title.setText("Vehicle Re-Identification System") # Change Home Title
-        self.explain.setText("Welcome to the Vehicle Re-Identification System")            # Change Home Subtitle
+        self.explain_title.setText("Zeyu的毕业设计-车辆重识别系统2026") # Change Home Title
+        self.explain.setText("欢迎来到车辆重识别系统")            # Change Home Subtitle
 
         # Modify Avatar (Logo)
         # Ensure the path is correct. Using absolute path for safety in stylesheet.
@@ -336,7 +336,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
                 self.save_txt_button_2.setEnabled(
                     False)  # It is forbidden to check and save after starting the detection
                 self.save_res_button_2.setEnabled(False)
-                self.show_reid_status('Detecting...')
+                self.show_reid_status('检查中...')
                 self.yolo_clip_reidentifier.continue_dtc = True  # Control whether Yolo is paused
                 if not self.yolo_clip_thread.isRunning():
                     self.yolo_clip_thread.start()
@@ -344,7 +344,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
 
             else:
                 self.yolo_clip_reidentifier.continue_dtc = False
-                self.show_reid_status("Pause...")
+                self.show_reid_status("请等待...")
                 self.run_button_2.setChecked(False)  # start button
 
     # bottom status bar information
@@ -421,7 +421,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
                                               "Pic File(*.mp4 *.mkv *.avi *.flv *.jpg *.png)")
         if name:
             self.yolo_clip_reidentifier.source = name
-            self.show_reid_status('Load File：{}'.format(os.path.basename(name)))
+            self.show_reid_status('本地文件：{}'.format(os.path.basename(name)))
             config['open_fold'] = os.path.dirname(name)
             config_json = json.dumps(config, ensure_ascii=False, indent=2)
             with open(config_file, 'w', encoding='utf-8') as f:
@@ -508,7 +508,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
             action = popMenu.exec(pos)
             if action:
                 self.yolo_clip_reidentifier.source = action.text()
-                self.show_reid_status('Loading camera：{}'.format(action.text()))
+                self.show_reid_status('加载摄像头中：{}'.format(action.text()))
 
         except Exception as e:
             self.show_reid_status('%s' % e)
@@ -558,7 +558,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
                                               "Pic File(*.jpg *.png)")
         if name:
             self.yolo_clip_reidentifier.image_path = name
-            self.show_reid_status('Select target image：{}'.format(os.path.basename(name)))
+            self.show_reid_status('选择目标图像：{}'.format(os.path.basename(name)))
             config['open_fold'] = os.path.dirname(name)
             config_json = json.dumps(config, ensure_ascii=False, indent=2)
             with open(config_file, 'w', encoding='utf-8') as f:
@@ -606,7 +606,7 @@ class MainWindow(QMainWindow, Ui_MainWindow): #窗口函数
             new_json = json.dumps(new_config, ensure_ascii=False, indent=2)
             with open('config/ip.json', 'w', encoding='utf-8') as f:
                 f.write(new_json)
-            self.show_reid_status('Loading rtsp：{}'.format(ip))
+            self.show_reid_status('加载视频流中：{}'.format(ip))
             self.rtsp_window.close()
         except Exception as e:
             self.show_reid_status('%s' % e)
